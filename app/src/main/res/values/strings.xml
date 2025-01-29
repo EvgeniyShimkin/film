@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="text1"> Меню </string>
+    <string name="text2"> Избранное </string>
+    <string name="text3"> Посмотреть позже </string>
+    <string name="text4"> Настройки </string>
+    <string name="text5"> Выйти </string>
+    <string name="menu_settings_title"> Настройки </string>
+    <string name="menu_favorites_title"> Избранное </string>
+    <string name="menu_watch_later_title"> Смотреть позже </string>
+    <string name="menu_selections_title"> Рекомендации </string>
+
 </resources>
