@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailsActivity"
+            android:name=".DetailsFragment"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
