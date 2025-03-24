@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
+    android:background="@drawable/back_main"
+    android:visibility="visible"
+
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout

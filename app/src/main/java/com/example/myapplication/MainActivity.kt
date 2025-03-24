@@ -11,17 +11,23 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_MyApplication)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         initNavigation()
 
         binding.topAppBar.setNavigationOnClickListener {
@@ -47,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         private fun initNavigation() {
+
+
             binding.topAppBar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.button_setting -> {
@@ -57,32 +65,54 @@ class MainActivity : AppCompatActivity() {
                     else -> false
                 }
             }
+
+
             binding.bottomNavigation.setOnNavigationItemSelectedListener {
                 when (it.itemId) {
+                    R.id.home -> {
+                        val tag = "home"
+                        val fragment = checkFragmentExistence(tag)
+                        changeFragment(fragment ?: HomeFragment(), tag)
+                        true
+                    }
+
                     R.id.favorites -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.fragment_placeholder,FavoritesFragment())
-                            .addToBackStack(null).commit()
+                        val tag = "favorites"
+                        val fragment = checkFragmentExistence(tag)
+                        changeFragment(fragment ?: FavoritesFragment(), tag)
                         true
                     }
 
                     R.id.watch_later -> {
-                        Toast.makeText(this, "Посмотреть позже", Toast.LENGTH_SHORT).show()
+                        val tag = "watch_later"
+                        val fragment = checkFragmentExistence(tag)
+                        changeFragment(fragment ?: WatchLaterFragment(), tag)
                         true
                     }
-
                     R.id.selections -> {
-                        Toast.makeText(this, "Рекомендации", Toast.LENGTH_SHORT).show()
+                        val tag = "selections"
+                        val fragment = checkFragmentExistence(tag)
+                        changeFragment(fragment ?: SelectionsFragment(), tag)
                         true
                     }
 
                     else -> false
                 }
             }
-
-
         }
-
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
     }
+
+
+}
+
+
 
 
 
