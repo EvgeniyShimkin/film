@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/baseline_play_circle_24">
+
+    <target
+        android:name="vect"
+        android:animation="@animator/rotation" />
+
+</animated-vector>
