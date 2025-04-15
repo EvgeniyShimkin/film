@@ -8,18 +8,26 @@
     app:cardCornerRadius="10dp"
     xmlns:tools="http://schemas.android.com/tools"
     app:layoutDescription="@xml/poster_motion_scene"
-
     >
-
-
-        <ImageView
+       <ImageView
             android:id="@+id/poster"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars"/>
+            tools:src="@tools:sample/avatars" />
+
+    <com.example.myapplication.RatingDonutView
+        android:id="@+id/rating_donut"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:elevation="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/description"
+        app:progress="50"
+        app:stroke="10" />
+
 
         <TextView
             android:id="@+id/title"

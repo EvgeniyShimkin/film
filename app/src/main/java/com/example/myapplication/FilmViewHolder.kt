@@ -10,14 +10,14 @@ class FilmViewHolder (val binding: FilmItemBinding) : RecyclerView.ViewHolder(bi
     private val poster = binding.poster
     private val description = binding.description
 
+    private val ratingDonut = binding.ratingDonut
+
     fun bind(film: Film){
         title.text = film.title
         poster.setImageResource(film.poster)
-
-
-
-
         description.text = film.description
+        //Устанавливаем рэйтинг
+        ratingDonut.setProgress((film.rating * 10).toInt())
     }
 
 
