@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.view.rv_adapters.FilmListRecyclerAdapter
+import com.example.myapplication.MainActivity
+import com.example.myapplication.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myapplication.databinding.FragmentFavoritesBinding
+import com.example.myapplication.domain.Film
+import com.example.myapplication.utils.AnimationHelper
 
 
 class FavoritesFragment : Fragment() {

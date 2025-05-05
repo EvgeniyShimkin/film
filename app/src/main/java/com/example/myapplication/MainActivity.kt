@@ -1,22 +1,16 @@
 package com.example.myapplication
 
-import android.content.Intent
-import android.icu.text.Transliterator.Position
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.domain.Film
+import com.example.myapplication.view.fragments.DetailsFragment
+import com.example.myapplication.view.fragments.FavoritesFragment
+import com.example.myapplication.view.fragments.HomeFragment
+import com.example.myapplication.view.fragments.SelectionsFragment
+import com.example.myapplication.view.fragments.WatchLaterFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

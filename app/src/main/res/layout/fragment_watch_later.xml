@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/back_watch_later"
     android:visibility="visible"
-    tools:context=".WatchLaterFragment"
+    tools:context=".view.fragments.WatchLaterFragment"
     tools:visibility="visible">
 
 

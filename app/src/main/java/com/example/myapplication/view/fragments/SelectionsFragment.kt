@@ -1,12 +1,12 @@
-package com.example.myapplication
+package com.example.myapplication.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.myapplication.databinding.FragmentFavoritesBinding
 import com.example.myapplication.databinding.FragmentSelectionsBinding
+import com.example.myapplication.utils.AnimationHelper
 
 class SelectionsFragment : Fragment() {
     private var binding: FragmentSelectionsBinding? = null

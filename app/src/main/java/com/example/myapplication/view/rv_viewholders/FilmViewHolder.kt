@@ -1,14 +1,16 @@
-package com.example.myapplication
+package com.example.myapplication.view.rv_viewholders
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.FilmItemBinding
+import com.example.myapplication.domain.Film
 
 class FilmViewHolder (val binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     private val title = binding.title
     private val poster = binding.poster
     private val description = binding.description
+
+
 
     private val ratingDonut = binding.ratingDonut
 

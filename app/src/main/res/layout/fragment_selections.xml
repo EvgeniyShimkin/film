@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/back_select"
     android:visibility="visible"
-    tools:context=".SelectionsFragment"
+    tools:context=".view.fragments.SelectionsFragment"
     tools:visibility="visible">
 
 
