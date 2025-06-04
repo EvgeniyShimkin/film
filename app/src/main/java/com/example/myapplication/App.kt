@@ -5,6 +5,8 @@ import com.example.myapplication.data.MainRepository
 import com.example.myapplication.domain.Interactor
 import com.example.myapplication.data.ApiConstants
 import com.example.myapplication.data.TmdbApi
+import com.example.myapplication.di.AppComponent
+import com.example.myapplication.di.DaggerAppComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,6 +14,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class App: Application() {
+    lateinit var dagger: AppComponent
+
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+        //Создаем компонент
+        dagger = DaggerAppComponent.create()
+    }
+
+    companion object {
+        lateinit var instance: App
+            private set
+    }
+}
+
+    /*
     lateinit var repo: MainRepository
     lateinit var interactor: Interactor
     lateinit var retrofitService: TmdbApi
@@ -47,4 +65,4 @@ class App: Application() {
             //Приватный сеттер, чтобы нельзя было в эту переменную присвоить что-либо другое
             private set
     }
-}
+}*/
