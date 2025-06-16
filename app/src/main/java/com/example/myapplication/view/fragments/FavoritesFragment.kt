@@ -55,6 +55,7 @@ class FavoritesFragment : Fragment() {
             }
         //Кладем нашу БД в RV
         filmsAdapter.addItems(favoritesList)
+
     }
     }
 

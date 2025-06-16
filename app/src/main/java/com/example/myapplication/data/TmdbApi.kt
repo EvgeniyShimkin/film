@@ -3,11 +3,13 @@ package com.example.myapplication.data
 import retrofit2.Call
 import com.example.myapplication.data.Enity.TmdbResults
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TmdbApi {
-    @GET("movie/popular")
+    @GET("movie/{category}")
     fun getFilms(
+        @Path("category") category: String,
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int

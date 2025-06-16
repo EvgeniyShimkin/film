@@ -23,29 +23,98 @@ import java.util.Locale
 
 class HomeFragment : Fragment() {
     //private lateinit var binding: MergeHomeScreenContentBinding
-    private  val viewModel by lazy{
+    private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
 
     private lateinit var binding: HomeFragmentMotionSceneBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-
     private var filmsDataBase = listOf<Film>()
-        set(value){
-            if(field == value) return
+        set(value) {
+            if (field == value) return
             field = value
             filmsAdapter.addItems(field)
         }
 
+    //1
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
+    //1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = HomeFragmentMotionSceneBinding.inflate(layoutInflater)
-        // сама навигация
-        initHomeFragment()
         return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val motionLayout = binding.root
+        motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int
+            ) {
+            }
+            override fun onTransitionChange(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+                progress: Float
+            ) {
+                binding.searchView.translationY = 0F
+                binding.searchView.alpha = 1F
+            }
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+            }
+            override fun onTransitionTrigger(
+                motionLayout: MotionLayout?,
+                triggerId: Int,
+                positive: Boolean,
+                progress: Float
+            ) {
+            }
+        })//фиксация чтобы при скролле не съехала
+        binding.mainRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                binding.searchView.translationY = 0f
+                binding.searchView.alpha = 1f
+            }
+        })//включаем на стартовый экран при первом запуске
+        motionLayout.post {
+            motionLayout.transitionToEnd()
+            binding.mainRecycler.isNestedScrollingEnabled = false
+        }
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+            filmsDataBase = it
+        })
+        initHomeFragment()
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+            filmsDataBase = it
+            filmsAdapter.addItems(it)
+        })
+        initPullToRefresh()
+
+    }
+
+
+
+    private fun initPullToRefresh() {
+        //Вешаем слушатель, чтобы вызвался pull to refresh
+        binding.pullToRefresh.setOnRefreshListener {
+            //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+            filmsAdapter.items.clear()
+            //Делаем новый запрос фильмов на сервер
+            viewModel.getFilms()
+            //Убираем крутящиеся колечко
+            binding.pullToRefresh.isRefreshing = false
+        }
+    }
+
 
     private fun initHomeFragment() {
         binding.mainRecycler.layoutManager = LinearLayoutManager(requireContext())
@@ -85,59 +154,7 @@ class HomeFragment : Fragment() {
             }
         })
     }
-//добавляем анимацию
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val motionLayout = binding.root
-        motionLayout.setTransitionListener(object: MotionLayout.TransitionListener{
-            override fun onTransitionStarted(
-                motionLayout: MotionLayout?,
-                startId: Int,
-                endId: Int
-            )
-            {}
-
-
-
-
-
-            override fun onTransitionChange(
-                motionLayout: MotionLayout?,
-                startId: Int,
-                endId: Int,
-                progress: Float
-            ) {
-                binding.searchView.translationY = 0F
-                binding.searchView.alpha = 1F
-            }
-
-            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-
-            }
-
-            override fun onTransitionTrigger(
-                motionLayout: MotionLayout?,
-                triggerId: Int,
-                positive: Boolean,
-                progress: Float
-            ) {}
-        })//фиксация чтобы при скролле не съехала
-        binding.mainRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                binding.searchView.translationY = 0f
-                binding.searchView.alpha = 1f
-            }
-        })//включаем на стартовый экран при первом запуске
-        motionLayout.post {
-            motionLayout.transitionToEnd()
-            binding.mainRecycler.isNestedScrollingEnabled = false
-        }
-    viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-        filmsDataBase = it
-    })
-
-
-
-    }
 }
+//добавляем анимацию
+
 

@@ -12,7 +12,7 @@ import com.example.myapplication.domain.Film
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val items = mutableListOf<Film>()
+    public val items = mutableListOf<Film>()
     private lateinit var binding: FilmItemBinding
 
 

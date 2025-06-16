@@ -7,6 +7,9 @@ import com.example.myapplication.data.ApiConstants
 import com.example.myapplication.data.TmdbApi
 import com.example.myapplication.di.AppComponent
 import com.example.myapplication.di.DaggerAppComponent
+import com.example.myapplication.di.modules.DatabaseModule
+import com.example.myapplication.di.modules.DomainModule
+import com.example.myapplication.di.modules.RemoteModule
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,7 +23,11 @@ class App: Application() {
         super.onCreate()
         instance = this
         //Создаем компонент
-        dagger = DaggerAppComponent.create()
+        dagger = DaggerAppComponent.builder()
+            .remoteModule(RemoteModule())
+            .databaseModule(DatabaseModule())
+            .domainModule(DomainModule(this))
+            .build()
     }
 
     companion object {

@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.insert.koin.koin.android)
     implementation(libs.dagger)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt(libs.dagger.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
