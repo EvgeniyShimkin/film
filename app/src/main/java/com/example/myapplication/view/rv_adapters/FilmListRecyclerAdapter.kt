@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.view.rv_viewholders.FilmViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FilmItemBinding
-import com.example.myapplication.domain.Film
+import com.example.myapplication.data.Enity.Film
 
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

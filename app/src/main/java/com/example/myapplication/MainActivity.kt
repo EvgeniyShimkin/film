@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.domain.Film
+import com.example.myapplication.data.Enity.Film
 import com.example.myapplication.view.fragments.DetailsFragment
 import com.example.myapplication.view.fragments.FavoritesFragment
 import com.example.myapplication.view.fragments.HomeFragment

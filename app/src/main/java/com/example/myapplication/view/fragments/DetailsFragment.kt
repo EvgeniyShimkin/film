@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 //import com.example.myapplication.databinding.ActivityDetailsBinding
 import com.example.myapplication.databinding.FragmentDetailsBinding
-import com.example.myapplication.domain.Film
+import com.example.myapplication.data.Enity.Film
 import com.example.myapplication.data.ApiConstants
 
 class DetailsFragment : Fragment() {

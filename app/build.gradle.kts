@@ -67,7 +67,10 @@ dependencies {
     implementation(libs.insert.koin.koin.android)
     implementation(libs.dagger)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.room.runtime)
     kapt(libs.dagger.compiler)
+    kapt ("androidx.room:room-compiler:2.7.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

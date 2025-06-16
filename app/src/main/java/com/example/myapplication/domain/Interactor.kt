@@ -1,5 +1,7 @@
 package com.example.myapplication.domain
 
+import androidx.lifecycle.LiveData
+import com.example.myapplication.data.Enity.Film
 import retrofit2.Call
 import retrofit2.Callback
 import com.example.myapplication.data.MainRepository
@@ -29,12 +31,11 @@ class Interactor(
             override fun onResponse(call: Call<TmdbResults>, response: Response<TmdbResults>) {
                 val list =Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
                 list.forEach {
-                    repo.putToDb(film = it)
+                    repo.putToDb(list)
 
                 }
 
-                //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -50,6 +51,6 @@ class Interactor(
 
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
 
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 
 }
