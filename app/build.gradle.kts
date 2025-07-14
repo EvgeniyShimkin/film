@@ -68,6 +68,10 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.room.ktx)
     kapt(libs.dagger.compiler)
     kapt ("androidx.room:room-compiler:2.7.0")
 
