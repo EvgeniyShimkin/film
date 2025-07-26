@@ -27,6 +27,11 @@ kotlinxCoroutinesCore = "1.10.2"
 kotlinxCoroutinesAndroid = "1.10.2"
 fragmentKtx = "1.8.8"
 roomKtx = "2.7.0"
+roomRxjava3 = "2.7.0"
+rxjava = "3.1.10"
+rxandroid = "3.0.2"
+rxkotlin = "3.0.1"
+rxjava3RetrofitAdapter = "3.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -55,6 +60,11 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version = "1.7.3" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "roomRxjava3" }
+rxjava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxjava" }
+rxandroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid" }
+rxkotlin = { group = "io.reactivex.rxjava3", name = "rxkotlin", version.ref = "rxkotlin" }
+rxjava3-retrofit-adapter = { group = "com.github.akarnokd", name = "rxjava3-retrofit-adapter", version.ref = "rxjava3RetrofitAdapter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

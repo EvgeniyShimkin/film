@@ -5,6 +5,6 @@ import androidx.room.RoomDatabase
 import com.example.myapplication.data.DAO.FilmDao
 import com.example.myapplication.data.Enity.Film
 
-@Database(entities = [Film::class], version = 1, exportSchema = false)abstract class AppDatabase : RoomDatabase() {
+@Database(entities = [Film::class], version = 2, exportSchema = false)abstract class AppDatabase : RoomDatabase() {
     abstract fun filmDao(): FilmDao
 }

@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.App
 import com.example.myapplication.data.Enity.Film
 import com.example.myapplication.domain.Interactor
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -15,8 +17,8 @@ class HomeFragmentViewModel : ViewModel() {
 
     @Inject
     lateinit var interactor: Interactor
-    val filmsListData: Flow<List<Film>>
-    val showProgressBar: Channel<Boolean>
+    val filmsListData: Observable<List<Film>>
+    val showProgressBar: BehaviorSubject<Boolean>
 
 
     init {
@@ -29,5 +31,7 @@ class HomeFragmentViewModel : ViewModel() {
     fun getFilms() {
         interactor.getFilmsFromApi(1)
     }
+    fun getSearchResult(search: String) = interactor.getSearchResultFromApi(search)
+
 
 }
