@@ -72,6 +72,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.rxjava3)
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
     kapt(libs.dagger.compiler)
     kapt ("androidx.room:room-compiler:2.7.0")
 

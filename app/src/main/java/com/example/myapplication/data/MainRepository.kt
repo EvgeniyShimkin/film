@@ -2,6 +2,7 @@ package com.example.myapplication.data
 
 import android.content.ContentValues
 import android.database.Cursor
+import io.reactivex.rxjava3.core.Observable
 import androidx.lifecycle.LiveData
 import com.example.myapplication.data.DAO.FilmDao
 import com.example.myapplication.data.Enity.Film
@@ -16,7 +17,7 @@ class MainRepository (private val filmDao: FilmDao) {
         }
     }
 
-    fun getAllFromDB(): Flow<List<Film>> = filmDao.getCachedFilms()
+    fun getAllFromDB(): Observable<List<Film>> = filmDao.getCachedFilms()
 
 
 }
