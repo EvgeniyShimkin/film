@@ -1,10 +1,10 @@
 package com.example.myapplication.utils
 
 import com.example.myapplication.data.Enity.Film
-import com.example.myapplication.data.Enity.TmdbFilm
+import com.example.remote_module.entity.TmdbFilm
 
 object Converter {
-    fun convertApiListToDtoList(list: List<TmdbFilm>?): List<Film> {
+    fun convertApiListToDtoList(list: List<com.example.remote_module.entity.TmdbFilm>?): List<Film> {
         val result = mutableListOf<Film>()
         list?.forEach {
             result.add(

@@ -16,14 +16,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 //import com.example.myapplication.databinding.ActivityDetailsBinding
 import com.example.myapplication.databinding.FragmentDetailsBinding
 import com.example.myapplication.data.Enity.Film
-import com.example.myapplication.data.ApiConstants
+import com.example.myapplication.view.notifications.NotificationHelper
+import com.example.remote_module.entity.ApiConstants
 import com.example.myapplication.viewmodel.DetailsFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
@@ -31,7 +30,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
@@ -77,6 +75,9 @@ class DetailsFragment : Fragment() {
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
         }
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
+        }
 
     }
 
@@ -88,7 +89,7 @@ class DetailsFragment : Fragment() {
             binding.detailsDescription.text = film.description
 
             Glide.with(this)
-                .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+                .load(com.example.remote_module.entity.ApiConstants.IMAGES_URL + "w780" + film.poster)
                 .centerCrop()
                 .into(binding.detailsPoster)
 
@@ -116,7 +117,7 @@ class DetailsFragment : Fragment() {
             binding.progressBar.isVisible = true
             //Создаем через async так как нам нужен результат от работы, то есть Bitmap
             val job = scope.async {
-                viewModel.loadWallpaper(ApiConstants.IMAGES_URL + "original" + film.poster)
+                viewModel.loadWallpaper(com.example.remote_module.entity.ApiConstants.IMAGES_URL + "original" + film.poster)
             }
             //Сохраняем в галерею, как только файл загрузится
             saveToGallery(job.await())

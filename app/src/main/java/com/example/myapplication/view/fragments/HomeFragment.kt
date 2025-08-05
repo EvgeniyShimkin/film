@@ -35,14 +35,16 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment() {
-    private val viewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
-    }
 
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
+    }
     private val autoDisposable = AutoDisposable()
     private lateinit var binding: HomeFragmentMotionSceneBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private var filmsDataBase = listOf<Film>()
+
+
         set(value) {
             if (field == value) return
             field = value
@@ -53,7 +55,6 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         autoDisposable.bindTo(lifecycle)
-        retainInstance = true
     }
 
     //1
@@ -115,7 +116,6 @@ class HomeFragment : Fragment() {
 
         initPullToRefresh()
         initHomeFragment()
-        initPullToRefresh()
 
 
         viewModel.filmsListData.subscribeOn(Schedulers.io())
@@ -124,6 +124,7 @@ class HomeFragment : Fragment() {
                 filmsDataBase = list
             }
             .addTo(autoDisposable)
+
         viewModel.showProgressBar
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -136,7 +137,7 @@ class HomeFragment : Fragment() {
     private fun initPullToRefresh() {
         //Вешаем слушатель, чтобы вызвался pull to refresh
         binding.pullToRefresh.setOnRefreshListener {
-            //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+                       //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
             filmsAdapter.items.clear()
             //Делаем новый запрос фильмов на сервер
             viewModel.getFilms()
@@ -207,15 +208,15 @@ class HomeFragment : Fragment() {
             .addTo(autoDisposable)
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
+            override fun onQueryTextSubmit(query: String?): Boolean = false
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
                     filmsAdapter.addItems(filmsDataBase)
                     return true
                 }
+
+
                 //Фильтруем список на поискк подходящих сочетаний
                 val result = filmsDataBase.filter {
                     //Чтобы все работало правильно, нужно и запрос, и имя фильма приводить к нижнему регистру

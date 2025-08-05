@@ -1,20 +1,16 @@
 package com.example.myapplication
 
 import android.app.Application
-import com.example.myapplication.data.MainRepository
-import com.example.myapplication.domain.Interactor
-import com.example.myapplication.data.ApiConstants
-import com.example.myapplication.data.TmdbApi
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import com.example.myapplication.di.AppComponent
 import com.example.myapplication.di.DaggerAppComponent
 import com.example.myapplication.di.modules.DatabaseModule
 import com.example.myapplication.di.modules.DomainModule
-import com.example.myapplication.di.modules.RemoteModule
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+import com.example.myapplication.view.notifications.NotificationConstants.CHANNEL_ID
+import com.example.remote_module.DaggerRemoteComponent
+import com.example.remote_module.RemoteModule
 
 class App: Application() {
     lateinit var dagger: AppComponent
@@ -23,53 +19,32 @@ class App: Application() {
         super.onCreate()
         instance = this
         //Создаем компонент
+        val remoteComponent = DaggerRemoteComponent.create()
         dagger = DaggerAppComponent.builder()
-            .remoteModule(RemoteModule())
+            .remoteProvider(remoteComponent)
             .databaseModule(DatabaseModule())
             .domainModule(DomainModule(this))
             .build()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //Задаем имя, описание и важность канала
+            val name = "WatchLaterChannel"
+            val descriptionText = "FilmsSearch notification Channel"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            //Создаем канал, передав в параметры его ID(строка), имя(строка), важность(константа)
+            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
+            //Отдельно задаем описание
+            mChannel.description = descriptionText
+            //Получаем доступ к менеджеру нотификаций
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            //Регистрируем канал
+            notificationManager.createNotificationChannel(mChannel)
+        }
     }
+
 
     companion object {
         lateinit var instance: App
             private set
     }
 }
-
-    /*
-    lateinit var repo: MainRepository
-    lateinit var interactor: Interactor
-    lateinit var retrofitService: TmdbApi
-
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-        //Инициализируем репозиторий
-        repo = MainRepository()
-
-
-        val okHttpClient = OkHttpClient.Builder()
-            .callTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                if (BuildConfig.DEBUG){
-                    level = HttpLoggingInterceptor.Level.BASIC
-                }
-            })
-            .build()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(ApiConstants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-        retrofitService = retrofit.create(TmdbApi::class.java)
-        interactor = Interactor(repo,retrofitService)
-    }
-
-    companion object {
-        //Здесь статически хранится ссылка на экземпляр App
-        lateinit var instance: App
-            //Приватный сеттер, чтобы нельзя было в эту переменную присвоить что-либо другое
-            private set
-    }
-}*/

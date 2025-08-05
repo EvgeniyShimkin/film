@@ -1,11 +1,16 @@
 package com.example.myapplication
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.data.Enity.Film
+import com.example.myapplication.receivers.ConnectionChecker
 import com.example.myapplication.view.fragments.DetailsFragment
 import com.example.myapplication.view.fragments.FavoritesFragment
 import com.example.myapplication.view.fragments.HomeFragment
@@ -15,6 +20,8 @@ import com.example.myapplication.view.fragments.WatchLaterFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MyApplication)
 
@@ -33,6 +40,23 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
+
+        //реагирование на зарядку и батарею
+        receiver = ConnectionChecker(this)
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        registerReceiver(receiver, filters)
+    }
+    //смена темы ночная и дневная
+    fun enableDarkTheme(enable: Boolean){
+        AppCompatDelegate.setDefaultNightMode(if(enable) AppCompatDelegate.MODE_NIGHT_YES
+        else AppCompatDelegate.MODE_NIGHT_NO)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 
         fun launchDetailsFragment(film: Film) {

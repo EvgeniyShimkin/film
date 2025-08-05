@@ -77,6 +77,8 @@ dependencies {
     implementation(libs.rxandroid)
     implementation(libs.rxkotlin)
     implementation(libs.rxjava3.retrofit.adapter)
+    implementation(project(":remote_module"))
+    implementation(libs.adapter.rxjava3)
     kapt(libs.dagger.compiler)
     kapt ("androidx.room:room-compiler:2.7.0")
 
