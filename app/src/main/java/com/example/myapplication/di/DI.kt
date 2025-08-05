@@ -1,18 +1,5 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.BuildConfig
-import com.example.myapplication.data.ApiConstants
-import com.example.myapplication.data.MainRepository
-import com.example.myapplication.data.TmdbApi
-import com.example.myapplication.domain.Interactor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
-
 
 /*object DI {
     val mainModule = module {
