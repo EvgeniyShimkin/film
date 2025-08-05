@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.FilmItemBinding
 import com.example.myapplication.data.Enity.Film
-import com.example.myapplication.data.ApiConstants
+import com.example.remote_module.entity.ApiConstants
 
 
 class FilmViewHolder (val binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -20,7 +20,7 @@ class FilmViewHolder (val binding: FilmItemBinding) : RecyclerView.ViewHolder(bi
     fun bind(film: Film){
         title.text = film.title
         Glide.with(itemView)
-            .load(ApiConstants.IMAGES_URL + "w342" + film.poster)
+            .load(com.example.remote_module.entity.ApiConstants.IMAGES_URL + "w342" + film.poster)
             .centerCrop()
             .into(poster)
         description.text = film.description
