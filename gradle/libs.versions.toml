@@ -32,6 +32,10 @@ rxjava = "3.1.10"
 rxandroid = "3.0.2"
 rxkotlin = "3.0.1"
 rxjava3RetrofitAdapter = "3.0.0"
+retrofitVersion = "3.0.0"
+converterGsonVersion = "3.0.0"
+loggingInterceptorVersion = "5.0.0-alpha.16"
+adapterRxjava3 = "3.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -65,8 +69,13 @@ rxjava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxjav
 rxandroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxandroid" }
 rxkotlin = { group = "io.reactivex.rxjava3", name = "rxkotlin", version.ref = "rxkotlin" }
 rxjava3-retrofit-adapter = { group = "com.github.akarnokd", name = "rxjava3-retrofit-adapter", version.ref = "rxjava3RetrofitAdapter" }
+retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version = "2.11.0" }
+retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptorVersion" }
+adapter-rxjava3 = { group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref = "adapterRxjava3" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
