@@ -87,10 +87,6 @@ class Interactor(
 
 
 
-
-
-
-
     fun saveDefaultCategoryToPreferences(category: String) {
         preferences.saveDetaultCategory(category)
     }
