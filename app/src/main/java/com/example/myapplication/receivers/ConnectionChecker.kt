@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
-import com.example.myapplication.MainActivity
+import com.example.myapplication.viewmodel.MainActivity
 
 class ConnectionChecker (private val activity: MainActivity) : BroadcastReceiver() {
 

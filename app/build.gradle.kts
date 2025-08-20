@@ -6,6 +6,21 @@ plugins {
 }
 
 android {
+    flavorDimensions += "version"
+
+    productFlavors {
+        create ("red") {
+            dimension = "version"
+            applicationIdSuffix = ".red"
+            versionNameSuffix = "-red"
+        }
+        create ("blue") {
+            dimension = "version"
+            applicationIdSuffix = ".blue"
+            versionNameSuffix = "-blue"
+        }
+    }
+
 
 
 
@@ -49,6 +64,18 @@ android {
     buildFeatures{
         viewBinding = true
         buildConfig = true
+    }
+    sourceSets {
+        getByName("red") {
+            java {
+                srcDirs("src\\red\\java", "src\\red\\java", "src\\red\\java", "src\\red\\java")
+            }
+        }
+        getByName("blue") {
+            java {
+                srcDirs("src\\blue\\java", "src\\blue\\java")
+            }
+        }
     }
 }
 

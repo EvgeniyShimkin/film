@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.viewmodel
 
 import android.content.BroadcastReceiver
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.data.Enity.Film
 import com.example.myapplication.receivers.ConnectionChecker
@@ -18,9 +19,11 @@ import com.example.myapplication.view.fragments.SelectionsFragment
 import com.example.myapplication.view.fragments.SettingsFragment
 import com.example.myapplication.view.fragments.WatchLaterFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  {
     private lateinit var binding: ActivityMainBinding
     private lateinit var receiver: BroadcastReceiver
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_MyApplication)
@@ -113,6 +116,7 @@ class MainActivity : AppCompatActivity() {
                         val fragment = checkFragmentExistence(tag)
                         changeFragment(fragment ?: SelectionsFragment(), tag)
                         true
+
                     }
                     R.id.settings -> {
                         val tag = "settings"

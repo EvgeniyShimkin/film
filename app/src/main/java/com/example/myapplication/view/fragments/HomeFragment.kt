@@ -9,12 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.view.rv_adapters.FilmListRecyclerAdapter
-import com.example.myapplication.MainActivity
+import com.example.myapplication.viewmodel.MainActivity
 import com.example.myapplication.view.rv_adapters.TopSpacingItemDecoration
 import com.example.myapplication.databinding.HomeFragmentMotionSceneBinding
 import com.example.myapplication.data.Enity.Film
@@ -26,11 +25,6 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
