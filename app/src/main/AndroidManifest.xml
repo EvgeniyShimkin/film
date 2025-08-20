@@ -38,6 +38,9 @@ android:name=".App"
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+        <receiver android:name=".receivers.ReceiverBroadcast"/>
+
     </application>
+
 
 </manifest>
